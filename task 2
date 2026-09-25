@@ -1,0 +1,46 @@
+#include <iostream>
+using namespace std;
+class Distance 
+{
+private:
+    int feets;
+    float inches;
+public:
+    void getDis() 
+    {
+        cout << "Enter feets: ";
+        cin >> feets;
+        cout << "Enter inches: ";
+        cin >> inches;
+    }
+    void addDis(Distance d1, Distance d2) 
+    {
+        feets = d1.feets + d2.feets;
+        inches = d1.inches + d2.inches;
+      if (inches >= 12.0) 
+{
+    while (inches >= 12.0) 
+    {
+        feets++;        
+        inches -= 12; 
+    }
+}
+    }
+    void showDis() 
+    {
+        cout << "Feets: " << feets << endl;
+        cout << "Inches: " << inches << endl;
+    }
+};
+int main() 
+{
+    Distance d1, d2, d3;
+    cout << "Enter First Distance" << endl;
+    d1.getDis();
+    cout << "Enter Second Distance" << endl;
+    d2.getDis();
+    d3.addDis(d1, d2);
+    cout << "Total Distance" << endl;
+    d3.showDis();
+    return 0;
+}
