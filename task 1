@@ -1,0 +1,50 @@
+#include <iostream>
+using namespace std;
+class Time 
+{
+private:
+    int hours;
+    int min;
+    int sec;
+public:
+    void getTime() 
+    {
+        cout << "Enter hours: ";
+        cin >> hours;
+        cout << "Enter minutes: ";
+        cin >> min;
+        cout << "Enter seconds: ";
+        cin >> sec;
+    }
+    void addTime(Time obj1, Time obj2) 
+    {
+        sec = obj1.sec + obj2.sec;
+        min = obj1.min + obj2.min + (sec / 60);
+        sec = sec % 60;
+        hours = obj1.hours + obj2.hours + (min / 60);
+        min = min % 60;
+    }
+    int numberOfDays(Time obj) 
+    {
+        return obj.hours/24;
+    }
+    void displayTime(Time obj) 
+    {
+        cout << "Total Time" << endl;
+        cout << "Hours: " << obj.hours << endl;
+        cout << "Minutes: " << obj.min << endl;
+        cout << "Seconds: " << obj.sec << endl;
+        cout << "Days: " << numberOfDays(obj) << endl;
+    }
+};
+int main() 
+{
+    Time t1, t2, t3;
+    cout << "Enter first time" << endl;
+    t1.getTime();
+    cout << "Enter Second Time" << endl;
+    t2.getTime();
+    t3.addTime(t1, t2);
+    t3.displayTime(t3);
+    return 0;
+}
