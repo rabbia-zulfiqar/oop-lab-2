@@ -1,46 +1,52 @@
 #include <iostream>
 using namespace std;
-class Distance 
-{
+class Distance {
 private:
-    int feets;
-    float inches;
+    int feet;
+    int inches;
 public:
-    void getDis() 
-    {
-        cout << "Enter feets: ";
-        cin >> feets;
+    void getDist() {
+        cout << "Enter feet: ";
+        cin >> feet;
         cout << "Enter inches: ";
         cin >> inches;
     }
-    void addDis(Distance d1, Distance d2) 
-    {
-        feets = d1.feets + d2.feets;
-        inches = d1.inches + d2.inches;
-      if (inches >= 12.0) 
-{
-    while (inches >= 12.0) 
-    {
-        feets++;        
-        inches -= 12; 
-    }
-}
-    }
-    void showDis() 
-    {
-        cout << "Feets: " << feets << endl;
+    void showDist() {
+        cout << "Feet: " << feet << endl;
         cout << "Inches: " << inches << endl;
     }
+    Distance addDist(Distance d2) {
+        Distance result;
+        result.feet = feet + d2.feet;
+        result.inches = inches + d2.inches;
+   if (result.inches >= 12) {
+            result.feet = result.feet + 1;
+            result.inches = result.inches - 12;
+        }
+        return result;
+    }
+    Distance subDist(Distance d2) {
+        Distance result;
+        result.feet = feet - d2.feet;
+        result.inches = inches - d2.inches;
+        if (result.inches < 0) {
+            result.feet = result.feet - 1;
+            result.inches = result.inches + 12;
+        }
+        return result;
+    }
 };
-int main() 
-{
-    Distance d1, d2, d3;
+int main() {
+    Distance d1, d2, sum, diff;
     cout << "Enter First Distance" << endl;
-    d1.getDis();
+    d1.getDist();
     cout << "Enter Second Distance" << endl;
-    d2.getDis();
-    d3.addDis(d1, d2);
-    cout << "Total Distance" << endl;
-    d3.showDis();
+    d2.getDist();
+    sum = d1.addDist(d2);
+    diff = d1.subDist(d2);
+    cout << "Sum of Distances: " << endl;
+    sum.showDist();
+    cout << "Difference of Distances: " << endl;
+    diff.showDist();
     return 0;
 }
