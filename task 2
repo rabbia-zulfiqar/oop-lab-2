@@ -1,52 +1,52 @@
 #include <iostream>
+#include <cmath>
 using namespace std;
 class Distance {
 private:
     int feet;
-    int inches;
+    float inches;
 public:
     void getDist() {
-        cout << "Enter feet: ";
-        cin >> feet;
-        cout << "Enter inches: ";
-        cin >> inches;
-    }
-    void showDist() {
-        cout << "Feet: " << feet << endl;
-        cout << "Inches: " << inches << endl;
+        cout<<"Enter feet:";
+        cin>>feet;
+        cout<<"Enter inches: ";
+        cin>>inches;
     }
     Distance addDist(Distance d2) {
-        Distance result;
-        result.feet = feet + d2.feet;
-        result.inches = inches + d2.inches;
-   if (result.inches >= 12) {
-            result.feet = result.feet + 1;
-            result.inches = result.inches - 12;
+        Distance temp;
+        temp.feet=feet+d2.feet;
+        temp.inches=inches+d2.inches;
+        while (temp.inches >= 12.0) {
+            temp.feet++;
+            temp.inches -= 12.0;
         }
-        return result;
+        return temp;
     }
     Distance subDist(Distance d2) {
-        Distance result;
-        result.feet = feet - d2.feet;
-        result.inches = inches - d2.inches;
-        if (result.inches < 0) {
-            result.feet = result.feet - 1;
-            result.inches = result.inches + 12;
-        }
-        return result;
+        Distance temp;
+        float total1=(feet * 12.0) + inches;
+        float total2=(d2.feet * 12.0) + d2.inches;
+        float diff=abs(total1 - total2);
+        temp.feet=(int)diff/12;
+        temp.inches=(int)diff%12+(diff-(int)diff);
+        return temp;
+    }
+    void showDist() {
+        cout <<"Feet:"<<feet<< endl;
+        cout <<"Inches:"<<inches<< endl;
     }
 };
 int main() {
     Distance d1, d2, sum, diff;
-    cout << "Enter First Distance" << endl;
+    cout<<"Enter First Distance"<<endl;
     d1.getDist();
-    cout << "Enter Second Distance" << endl;
+    cout<< "Enter Second Distance"<<endl;
     d2.getDist();
-    sum = d1.addDist(d2);
-    diff = d1.subDist(d2);
-    cout << "Sum of Distances: " << endl;
+    sum=d1.addDist(d2);
+    diff=d1.subDist(d2);
+    cout<<"Sum of Distances:"<<endl;
     sum.showDist();
-    cout << "Difference of Distances: " << endl;
+    cout<<"Difference of Distances:"<<endl;
     diff.showDist();
     return 0;
 }
